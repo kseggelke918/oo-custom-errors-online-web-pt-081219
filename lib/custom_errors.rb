@@ -8,14 +8,20 @@ class Person
   def get_married(person)
     self.partner = person
     if person.class != person
-      raise PartnerError
+      begin #begin our error handling 
+        raise PartnerError
+      rescue PartnerError => error #rescue method creates an instance of the PartnerError class and puts out the result of calling message on that instance.
+          puts error.message
+      end 
     else 
       person.partner = self
     end 
   end
   
   class PartnerError < StandardError
-    
+    def message
+      "you must give the get_married method an argument of an instance of the person class!"
+    end 
   end 
 end
 
